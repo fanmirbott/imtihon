@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:imtihon/core/utils/AppColors.dart';
+import 'package:imtihon/core/utils/AppColors/AppColors.dart';
 import 'package:imtihon/features/onboarding/managers/TrendingProvider.dart';
 import 'package:provider/provider.dart';
 
@@ -50,9 +50,9 @@ class TrendingRecipe extends StatelessWidget {
                         alignment: Alignment.bottomCenter,
                         child: Container(
                           padding: EdgeInsetsGeometry.only(
-                            left: 15,
-                            right: 15,
-                            top: 20,
+                            left: 15.w,
+                            right: 15.w,
+                            top: 20.h,
                           ),
                           width: 348.w,
                           height: 59.h,
@@ -142,8 +142,8 @@ class TrendingRecipe extends StatelessWidget {
                         borderRadius: BorderRadiusGeometry.circular(14),
                         child: Image.network(
                           recipe.photo,
-                          width: 358,
-                          height: 143,
+                          width: 358.w,
+                          height: 143.h,
                           fit: BoxFit.cover,
                         ),
                       ),

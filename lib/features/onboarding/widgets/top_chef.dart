@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:imtihon/core/utils/AppColors.dart';
+import 'package:imtihon/core/utils/AppColors/AppColors.dart';
 import 'package:imtihon/features/onboarding/managers/TopChefProvider.dart';
 import 'package:provider/provider.dart';
 

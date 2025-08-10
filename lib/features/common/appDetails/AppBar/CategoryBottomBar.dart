@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:imtihon/features/onboarding/managers/homePageProvider.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../core/utils/AppColors.dart';
+import '../../../../core/utils/AppColors/AppColors.dart';
 
 class CategoryBottomBar extends StatefulWidget implements PreferredSizeWidget {
   const CategoryBottomBar({super.key});
@@ -24,7 +24,7 @@ class _CategoryBottomBarState extends State<CategoryBottomBar> {
       create: (context) => HomePageProvider(),
       builder: (context, child) => Consumer<HomePageProvider>(
         builder: (context, vm, child) => Padding(
-          padding: EdgeInsetsGeometry.only(left: 12, right: 30),
+          padding: EdgeInsetsGeometry.only(left: 12.w, right: 30.w),
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(

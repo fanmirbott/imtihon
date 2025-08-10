@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:imtihon/core/utils/AppColors.dart';
+import 'package:imtihon/core/utils/AppColors/AppColors.dart';
 import 'package:imtihon/features/onboarding/managers/YourRecipeProvider.dart';
 import 'package:provider/provider.dart';
 
@@ -57,8 +57,8 @@ class YourRecipes extends StatelessWidget {
                               borderRadius: BorderRadiusGeometry.circular(14),
                               child: Image.network(
                                 vm.yourRecipe[index].photo,
-                                width: 168.52,
-                                height: 162,
+                                width: 168.52.w,
+                                height: 162.h,
                                 fit: BoxFit.cover,
                               ),
                             ),

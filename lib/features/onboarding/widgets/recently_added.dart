@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:imtihon/features/onboarding/managers/RecentlyAddedProvider.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/utils/AppColors.dart';
+import '../../../core/utils/AppColors/AppColors.dart';
 
 class RecentlyAdded extends StatelessWidget {
   const RecentlyAdded({super.key});
@@ -48,8 +48,8 @@ class RecentlyAdded extends StatelessWidget {
                               borderRadius: BorderRadiusGeometry.circular(14),
                               child: Image.network(
                                 vm.recentlyAdded[index].photo,
-                                width: 168.52,
-                                height: 162,
+                                width: 168.52.w,
+                                height: 162.h,
                                 fit: BoxFit.cover,
                               ),
                             ),

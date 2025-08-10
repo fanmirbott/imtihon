@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:imtihon/core/utils/AppColors.dart';
+import 'package:imtihon/core/utils/AppColors/AppColors.dart';
 import 'package:imtihon/features/onboarding/pages/LaunchPage.dart';
 import 'package:imtihon/features/onboarding/pages/home_page.dart';
 
