@@ -6,8 +6,17 @@ import 'package:provider/provider.dart';
 
 import '../../../core/utils/AppColors/AppColors.dart';
 
-class RecentlyAdded extends StatelessWidget {
-  const RecentlyAdded({super.key});
+class RecentlyAdded extends StatefulWidget {
+  RecentlyAdded({super.key});
+
+  @override
+  State<RecentlyAdded> createState() => _RecentlyAddedState();
+}
+
+class _RecentlyAddedState extends State<RecentlyAdded> {
+  int like = 0;
+  List<bool> likedStates = [];
+
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +24,15 @@ class RecentlyAdded extends StatelessWidget {
       create: (context) => RecentlyAddedProvider(),
       child: Consumer<RecentlyAddedProvider>(
         builder: (context, vm, child) {
-          if (vm.isLoading) {
+          if (likedStates.length != vm.recentlyAdded.length) {
+            likedStates = List.filled(vm.recentlyAdded.length, false);
+          }          if (vm.isLoading) {
             return Center(child: CircularProgressIndicator());
           }
           if (vm.recentlyAdded.isEmpty) {
             return Center(child: Text("Ma'lumot topilmadi"));
           }
-          return
-          Padding(
+          return Padding(
             padding: EdgeInsetsGeometry.symmetric(horizontal: 36),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,11 +56,41 @@ class RecentlyAdded extends StatelessWidget {
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadiusGeometry.circular(14),
-                              child: Image.network(
-                                vm.recentlyAdded[index].photo,
-                                width: 168.52.w,
-                                height: 162.h,
-                                fit: BoxFit.cover,
+                              child: Stack(
+                                children: [
+                                  Image.network(
+                                    vm.recentlyAdded[index].photo,
+                                    width: 168.52.w,
+                                    height: 162.h,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  Positioned(
+                                    top: 7.h,
+                                    left: 132.w,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        likedStates[index] = !likedStates[index];
+                                        setState(() {
+                                        });
+                                      },
+                                      child: Container(
+                                        width: 28.w,
+                                        height: 28.h,
+                                        decoration: BoxDecoration(
+                                          color: likedStates[index]? AppColors().redpinkmain : AppColors().pink,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: SvgPicture.asset(
+                                          'assets/Icons/like.svg',
+                                          width: 15.w,
+                                          height: 15.h,
+                                          fit: BoxFit.none,
+                                          color: likedStates[index] ? AppColors().white : AppColors().pinksub
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                             Align(
@@ -99,7 +139,9 @@ class RecentlyAdded extends StatelessWidget {
                                             ),
                                             SizedBox(width: 4),
                                             Text(
-                                              vm.recentlyAdded[index].timeRequired
+                                              vm
+                                                  .recentlyAdded[index]
+                                                  .timeRequired
                                                   .toString(),
                                               style: TextStyle(
                                                 fontSize: 12,

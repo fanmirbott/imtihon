@@ -5,8 +5,15 @@ import 'package:imtihon/core/utils/AppColors/AppColors.dart';
 import 'package:imtihon/features/onboarding/managers/TrendingProvider.dart';
 import 'package:provider/provider.dart';
 
-class TrendingRecipe extends StatelessWidget {
+class TrendingRecipe extends StatefulWidget {
   const TrendingRecipe({super.key});
+
+  @override
+  State<TrendingRecipe> createState() => _TrendingRecipeState();
+}
+
+class _TrendingRecipeState extends State<TrendingRecipe> {
+  bool like = false;
 
   @override
   Widget build(BuildContext context) {
@@ -50,12 +57,12 @@ class TrendingRecipe extends StatelessWidget {
                         alignment: Alignment.bottomCenter,
                         child: Container(
                           padding: EdgeInsetsGeometry.only(
-                            left: 15.w,
-                            right: 15.w,
+                            left: 12.w,
+                            right: 10.w,
                             top: 20.h,
                           ),
                           width: 348.w,
-                          height: 59.h,
+                          height: 60.h,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(14.r),
                             border: Border.all(color: AppColors().pinksub),
@@ -63,7 +70,7 @@ class TrendingRecipe extends StatelessWidget {
                           child: Row(
                             children: [
                               SizedBox(
-                                width: 264.31.w,
+                                width: 265.31.w,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -140,11 +147,42 @@ class TrendingRecipe extends StatelessWidget {
                       ),
                       ClipRRect(
                         borderRadius: BorderRadiusGeometry.circular(14),
-                        child: Image.network(
-                          recipe.photo,
-                          width: 358.w,
-                          height: 143.h,
-                          fit: BoxFit.cover,
+                        child: Stack(
+                          children: [
+                            Image.network(
+                              recipe.photo,
+                              width: 358.w,
+                              height: 143.h,
+                              fit: BoxFit.cover,
+                            ),
+                            Positioned(
+                              top: 7,
+                              left: 322,
+                              child: GestureDetector(
+                                onTap: () {
+                                  like =! like;
+                                  setState(() {
+
+                                  });
+                                },
+                                child: Container(
+                                  width: 28.w,
+                                  height: 28.h,
+                                  decoration: BoxDecoration(
+                                    color: like ? AppColors().redpinkmain : AppColors().pink,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: SvgPicture.asset(
+                                      'assets/Icons/like.svg',
+                                      width: 15.w,
+                                      height: 15.h,
+                                      fit: BoxFit.none,
+                                      color: like? AppColors().white : AppColors().pinksub
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],

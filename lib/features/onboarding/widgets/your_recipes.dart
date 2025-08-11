@@ -5,8 +5,15 @@ import 'package:imtihon/core/utils/AppColors/AppColors.dart';
 import 'package:imtihon/features/onboarding/managers/YourRecipeProvider.dart';
 import 'package:provider/provider.dart';
 
-class YourRecipes extends StatelessWidget {
-  const YourRecipes({super.key});
+class YourRecipes extends StatefulWidget {
+  YourRecipes({super.key});
+
+  @override
+  State<YourRecipes> createState() => _YourRecipesState();
+}
+
+class _YourRecipesState extends State<YourRecipes> {
+  List<bool> likedStates = [];
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +21,9 @@ class YourRecipes extends StatelessWidget {
       create: (context) => YourRecipeProvider(),
       child: Consumer<YourRecipeProvider>(
         builder: (context, vm, child) {
+          if (likedStates.length != vm.yourRecipe.length) {
+            likedStates = List.filled(vm.yourRecipe.length, false);
+          }
           if (vm.isLoading) {
             return Center(child: CircularProgressIndicator());
           }
@@ -55,11 +65,40 @@ class YourRecipes extends StatelessWidget {
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadiusGeometry.circular(14),
-                              child: Image.network(
-                                vm.yourRecipe[index].photo,
-                                width: 168.52.w,
-                                height: 162.h,
-                                fit: BoxFit.cover,
+                              child: Stack(
+                                children:[ Image.network(
+                                  vm.yourRecipe[index].photo,
+                                  width: 168.52.w,
+                                  height: 162.h,
+                                  fit: BoxFit.cover,
+                                ),
+                                  Positioned(
+                                    top: 7.h,
+                                    left: 132.w,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        likedStates[index] = !likedStates[index];
+                                        setState(() {
+                                        });
+                                      },
+                                      child: Container(
+                                        width: 28.w,
+                                        height: 28.h,
+                                        decoration: BoxDecoration(
+                                          color: likedStates[index]? AppColors().redpinkmain : AppColors().pink,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: SvgPicture.asset(
+                                            'assets/Icons/like.svg',
+                                            width: 15.w,
+                                            height: 15.h,
+                                            fit: BoxFit.none,
+                                            color: likedStates[index] ? AppColors().white : AppColors().pinksub
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ]
                               ),
                             ),
                             Align(
